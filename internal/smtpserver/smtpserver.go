@@ -17,13 +17,12 @@ import (
 
 // The Backend implements SMTP server methods.
 type Backend struct {
-	Save func(string, []string, []byte)
+	Save func(string, []string, []byte) //数据存储函数
 }
 
 func (bkd *Backend) NewBackend(fun func(string, []string, []byte)) *Backend {
-	return &Backend{
-		Save: fun,
-	}
+	bkd.Save = fun
+	return bkd
 }
 
 // NewSession is called after client greeting (EHLO, HELO).
